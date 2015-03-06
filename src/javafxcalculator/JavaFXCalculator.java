@@ -65,7 +65,7 @@ public class JavaFXCalculator extends Application {
         stage.setResizable(false);
         Scene scene = new Scene(createLayout(screen, buttons));
         stage.setScene(scene);
-        scene.getStylesheets().add(Calculator.class.getResource("style.css").toExternalForm());
+        scene.getStylesheets().add(JavaFXCalculator.class.getResource("style.css").toExternalForm());
         stage.show();
     }
 
