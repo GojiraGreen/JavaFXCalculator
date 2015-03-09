@@ -1,3 +1,7 @@
 # JavaFXCalculator
 Based on:
-[this sample code](https://gist.github.com/jewelsea/4344564)
+[this code](https://gist.github.com/jewelsea/4344564)
+
+**Added:**
+-multiple operations
+-css background image
