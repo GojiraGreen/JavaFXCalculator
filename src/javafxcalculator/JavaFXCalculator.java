@@ -31,11 +31,6 @@ public class JavaFXCalculator extends Application {
 
     private final Map<String, Button> accelerators = new HashMap<>();
 
-    /**
-     * Holds addition and subtraction values.
-     */
-    private List<DoubleProperty> pmStack = new LinkedList<>();
-
     private DoubleProperty stackValue = new SimpleDoubleProperty();
     private DoubleProperty value = new SimpleDoubleProperty();
 
@@ -43,10 +38,7 @@ public class JavaFXCalculator extends Application {
 
         NOOP, ADD, SUBTRACT, MULTIPLY, DIVIDE
     }
-    /**
-     * Holds addition and subtraction operators.
-     */
-    private List<Op> opStack = new LinkedList<>();
+
     private Op curOp = Op.NOOP;
     private Op stackOp = Op.NOOP;
 
