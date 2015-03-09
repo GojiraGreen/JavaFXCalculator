@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import static javafx.application.Application.launch;
 
@@ -29,6 +31,11 @@ public class JavaFXCalculator extends Application {
 
     private final Map<String, Button> accelerators = new HashMap<>();
 
+    /**
+     * Holds addition and subtraction values.
+     */
+    private List<DoubleProperty> pmStack = new LinkedList<>();
+
     private DoubleProperty stackValue = new SimpleDoubleProperty();
     private DoubleProperty value = new SimpleDoubleProperty();
 
@@ -36,7 +43,10 @@ public class JavaFXCalculator extends Application {
 
         NOOP, ADD, SUBTRACT, MULTIPLY, DIVIDE
     }
-
+    /**
+     * Holds addition and subtraction operators.
+     */
+    private List<Op> opStack = new LinkedList<>();
     private Op curOp = Op.NOOP;
     private Op stackOp = Op.NOOP;
 
@@ -160,6 +170,9 @@ public class JavaFXCalculator extends Application {
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                if(stackOp != Op.NOOP){
+                    calculateValue();
+                }
                 curOp = triggerOp.get();
             }
         });
@@ -204,21 +217,32 @@ public class JavaFXCalculator extends Application {
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                switch (stackOp) {
-                    case ADD:
-                        value.set(stackValue.get() + value.get());
-                        break;
-                    case SUBTRACT:
-                        value.set(stackValue.get() - value.get());
-                        break;
-                    case MULTIPLY:
-                        value.set(stackValue.get() * value.get());
-                        break;
-                    case DIVIDE:
-                        value.set(stackValue.get() / value.get());
-                        break;
-                }
+                calculateValue();
+                curOp = Op.NOOP;
             }
         });
     }
+    
+    /**
+     * Calculate current value for equals button
+     * or multiple operations.
+     */
+    private void calculateValue(){
+        switch (stackOp) {
+            case ADD:
+                value.set(stackValue.get() + value.get());
+                break;
+            case SUBTRACT:
+                value.set(stackValue.get() - value.get());
+                break;
+            case MULTIPLY:
+                value.set(stackValue.get() * value.get());
+                break;
+            case DIVIDE:
+                value.set(stackValue.get() / value.get());
+                break;
+        }
+        stackOp = Op.NOOP;
+    }
 }
+
