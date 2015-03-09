@@ -1,4 +1,4 @@
-# JavaFXCalculator
+## JavaFXCalculator
 Based on:
 [this code](https://gist.github.com/jewelsea/4344564)
 
