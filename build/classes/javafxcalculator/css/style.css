@@ -9,5 +9,5 @@ and open the template in the editor.
 */
 
 .root {
-     -fx-background-image: url("background.gif");
+     -fx-background-image: url("../images/background.gif");
 }
